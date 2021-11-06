@@ -7,13 +7,13 @@ const { width, height } = Dimensions.get('screen');
 export default function Home({ navigation }) {
     const { data, error, isLoading } = useGetPokemonByNameQuery('');
 
-    if (data) {
-        console.log('data :', data)
-    } else if (isLoading) {
-        console.log(isLoading)
-    } else if (error) {
-        console.log(error);
-    }
+    // if (data) {
+    //     console.log('data :', data)
+    // } else if (isLoading) {
+    //     console.log(isLoading)
+    // } else if (error) {
+    //     console.log(error);
+    // }
 
     // const pokemonContainer = (item: Object) => {
     //     <View style={styles.pokemonContainer}>
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         textTransform: "uppercase",
         fontSize: 21,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'minecraft'
     }
 });
