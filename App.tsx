@@ -1,19 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux'
+import Home from './screens/Home';
+import Pokemon from './screens/Pokemon';
+import store from './store/store';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
+    const Stack = createNativeStackNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return (
+        <Provider store={store}>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen name="Pokemons" component={Home} options={{
+                        headerTitleAlign: 'left'
+                    }} />
+                    <Stack.Screen name="Pokemon" component={Pokemon} options={{
+                        headerTitleAlign: 'left'
+                    }} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </Provider>
+    );
+};
