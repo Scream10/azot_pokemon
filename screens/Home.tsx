@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, ScrollView, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
 import { useGetPokemonByNameQuery } from '../services/pokemon';
 
 const { width, height } = Dimensions.get('screen');
@@ -8,47 +8,38 @@ interface HomeProps {
     [key: string]: any
 } 
 
-const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
+const Home: React.FC<HomeProps> = ({ navigation }) => {
     const { data, error, isLoading } = useGetPokemonByNameQuery('');
-
-    // if (data) {
-    //     console.log('data :', data)
-    // } else if (isLoading) {
-    //     console.log(isLoading)
-    // } else if (error) {
-    //     console.log(error);
-    // }
-
-    // const pokemonContainer = (item: Object) => {
-    //     <View style={styles.pokemonContainer}>
-    //         <Text>{item.name}</Text>
-    //     </View>
-    // }
 
     return (
         <View style={styles.container}>
-            {/* <FlatList
-                data={data.results}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={pokemonContainer}
-            /> */}
             <ScrollView>
-                {data ? data.results.map((pokemon: any) => {
-                    return (
-                        <TouchableHighlight
-                            style={styles.pokemonContainer}
-                            activeOpacity={0.7}
-                            underlayColor="#ff6666"
-                            onPress={() => navigation.navigate({
-                                name: 'Pokemon',
-                                params: { pokemon: pokemon }
-                            })}
-                        >
-                            <Text style={styles.pokemonTitle}>{pokemon.name}</Text>
-                        </TouchableHighlight>
-                    )
-                })
-                    : null
+                {isLoading ?
+                    <View style={styles.containerLoader}>
+                        <ActivityIndicator size="large" color="red" />
+                    </View>
+                    : error ? 
+                        <View style={styles.containerError}>
+                            <Text>Oups ! Une erreur s'est produite. Veuillez vérifier votre connexion internet.</Text>
+                        </View>
+                        : data ? 
+                            data.results.map((pokemon: any, index: number) => {
+                                return (
+                                    <TouchableHighlight
+                                        key={index}
+                                        style={styles.pokemonContainer}
+                                        activeOpacity={0.7}
+                                        underlayColor="#ff6666"
+                                        onPress={() => navigation.navigate({
+                                            name: 'Pokemon',
+                                            params: { pokemon: pokemon }
+                                        })}
+                                    >
+                                        <Text style={styles.pokemonTitle}>{pokemon.name}</Text>
+                                    </TouchableHighlight>
+                                )
+                            })
+                            : null
                 }
             </ScrollView>
         </View>
@@ -79,5 +70,15 @@ const styles = StyleSheet.create({
         fontSize: 21,
         fontWeight: 'bold',
         fontFamily: 'minecraft'
+    },
+    containerLoader: {
+        width: width - 30,
+        height: height - 140,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    containerError: {
+        width: width - 30,
+        alignItems: 'center'
     }
 });

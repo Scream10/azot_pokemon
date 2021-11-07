@@ -10,7 +10,7 @@ interface PokemonProps {
     back_default: string
 }
 
-const Pokemon: React.FunctionComponent<PokemonProps> = (props) => {
+const Pokemon: React.FC<PokemonProps> = (props) => {
     const [pictures, setPictures] = useState<{[k: string]: any} | null>(null);
     const [switchPictures, setSwitchPictures] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     containerLoader: {
-        width,
-        height: height - 100,
+        width: width - 30,
+        height: height - 140,
         justifyContent: 'center',
         alignItems: 'center'
     }
