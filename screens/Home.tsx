@@ -4,7 +4,11 @@ import { useGetPokemonByNameQuery } from '../services/pokemon';
 
 const { width, height } = Dimensions.get('screen');
 
-export default function Home({ navigation }) {
+interface HomeProps {
+    [key: string]: any
+} 
+
+const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
     const { data, error, isLoading } = useGetPokemonByNameQuery('');
 
     // if (data) {
@@ -29,7 +33,7 @@ export default function Home({ navigation }) {
                 renderItem={pokemonContainer}
             /> */}
             <ScrollView>
-                {data ? data.results.map((pokemon) => {
+                {data ? data.results.map((pokemon: any) => {
                     return (
                         <TouchableHighlight
                             style={styles.pokemonContainer}
@@ -50,6 +54,8 @@ export default function Home({ navigation }) {
         </View>
     );
 }
+
+export default Home;
 
 const styles = StyleSheet.create({
     container: {

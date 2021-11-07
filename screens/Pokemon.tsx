@@ -4,12 +4,18 @@ import { Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('screen');
 
-export default function Pokemon(props) {
-    const [pictures, setPictures] = useState(null);
-    const [switchPictures, setSwitchPictures] = useState(true);
-    const [loading, setLoading] = useState(false);
+interface PokemonProps {
+    route: any,
+    front_default: string,
+    back_default: string
+}
 
-    const getPokemonPictures = (url) => {
+const Pokemon: React.FunctionComponent<PokemonProps> = (props) => {
+    const [pictures, setPictures] = useState<{[k: string]: any} | null>(null);
+    const [switchPictures, setSwitchPictures] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const getPokemonPictures = (url: string) => {
         setLoading(true);
         return fetch(url)
             .then((response) => response.json())
@@ -58,6 +64,7 @@ export default function Pokemon(props) {
         </View>
     )
 }
+export default Pokemon;
 
 const styles = StyleSheet.create({
     container: {

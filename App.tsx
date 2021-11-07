@@ -38,7 +38,6 @@ export default function App() {
                     options={{ 
                         headerTitleStyle: {color: '#fff'},
                         gestureEnabled: true,
-                        gestureDirection: 'vertical-inverted',
                         headerLeft: () => (
                             <Text style={styles.header}>
                                 Pokemons
@@ -52,7 +51,6 @@ export default function App() {
                     options={{ 
                         headerTitleStyle: {color: '#fff'},
                         gestureEnabled: true,
-                        gestureDirection: 'vertical-inverted',
                         headerBackTitle: 'Pokemon',
                         headerBackTitleStyle: { fontSize: 18 },
                         headerTintColor: '#000'
