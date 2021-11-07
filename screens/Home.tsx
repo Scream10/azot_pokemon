@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
-import { useGetPokemonByNameQuery } from '../services/pokemon';
+import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
+import { useGetPokemonByNameQuery } from '../api/pokemon';
 
 const { width, height } = Dimensions.get('screen');
 
