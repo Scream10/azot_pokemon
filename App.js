@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Provider } from 'react-redux'
+import { Text, StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
 import Home from './screens/Home';
 import Pokemon from './screens/Pokemon';
 import store from './store/store';
@@ -23,23 +24,66 @@ export default function App() {
             <AppLoading
                 startAsync={fetchFonts}
                 onFinish={() => setFontLoad(true)}
-                onError={console.log('error')}
+                onError={console.warn}
             />
         )
     }
 
+    const StackNavigator = () => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen 
+                    name="Pokemons" 
+                    component={Home} 
+                    options={{ 
+                        headerTitleStyle: {color: '#fff'},
+                        gestureEnabled: true,
+                        gestureDirection: 'vertical-inverted',
+                        headerLeft: () => (
+                            <Text style={styles.header}>
+                                Pokemons
+                            </Text>
+                        )
+                    }}
+                />
+                <Stack.Screen 
+                    name="Pokemon" 
+                    component={Pokemon} 
+                    options={{ 
+                        headerTitleStyle: {color: '#fff'},
+                        gestureEnabled: true,
+                        gestureDirection: 'vertical-inverted',
+                        headerBackTitle: 'Pokemon',
+                        headerBackTitleStyle: { fontSize: 18 },
+                        headerTintColor: '#000'
+                    }}
+                />
+            </Stack.Navigator>  
+        )
+    } 
+
     return (
         <Provider store={store}>
             <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen name="Pokemons" component={Home} options={{
-                        headerTitleAlign: 'left'
-                    }} />
-                    <Stack.Screen name="Pokemon" component={Pokemon} options={{
-                        headerTitleAlign: 'left'
-                    }} />
-                </Stack.Navigator>
+                <StackNavigator />
             </NavigationContainer>
         </Provider>
     );
 };
+
+const styles = StyleSheet.create({
+    header: {
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    headerGoBack: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginLeft: 20
+    },
+    buttonGoBack: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row'
+    }
+})
