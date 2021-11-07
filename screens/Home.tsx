@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingHorizontal: 15,
-        paddingVertical: 20
+        paddingHorizontal: 15
     },
     pokemonContainer: {
         width: width - 30,

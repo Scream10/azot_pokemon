@@ -7,11 +7,7 @@ export const store = configureStore({
         [pokemonApi.reducerPath]: pokemonApi.reducer,
         [pokemonPicturesApi.reducerPath]: pokemonPicturesApi.reducer,
     },
-    // hide in developement mode
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        immutableCheck: { ignoredPaths: ['some.nested.path'] },
-        serializableCheck: { ignoredPaths: ['some.nested.path'] }
-    })
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(pokemonApi.middleware).concat(pokemonPicturesApi.middleware)
 })
 
 setupListeners(store.dispatch)
